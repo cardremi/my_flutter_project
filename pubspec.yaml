@@ -36,6 +36,10 @@ dependencies:
   firebase_core: "^1.10.0"
   hexcolor: ^2.0.5
   dio: ^4.0.4
+  carousel_slider: ^4.0.0
+  bulleted_list: ^0.0.1+0.1a
+  dotted_border: ^2.0.0+2
+  flutter_markdown: ^0.6.9
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +66,12 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/images/
+  - assets/images/blue_bg.png
+  - assets/images/yellow_bg.png
+  - assets/images/green_bg.png
+  - assets/images/purple_bg.png
+  - assets/16personalities/
+  - assets/Msdt/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

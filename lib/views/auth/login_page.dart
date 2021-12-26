@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:skillana_flutter/controllers/auth/login_controller.dart';
 import 'package:skillana_flutter/widgets/general/form_input.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class LoginPage extends StatelessWidget {
-  final emailFC = TextEditingController();
+  final loginController = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +55,7 @@ class LoginPage extends StatelessWidget {
           formInput(
               title: 'Email / No. Telepon',
               placeholder: 'Email / No. Telepon',
-              controller: emailFC,
+              controller: loginController.emailFC,
               inputType: TextInputType.emailAddress,
               inputAction: TextInputAction.next,
               validator: (value) {
@@ -71,15 +72,12 @@ class LoginPage extends StatelessWidget {
           formInput(
               title: 'Password',
               placeholder: 'Password',
-              controller: emailFC,
+              controller: loginController.passwordFC,
               inputType: TextInputType.emailAddress,
               inputAction: TextInputAction.next,
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Masukkan email terlebih dahulu';
-                }
-                if (!GetUtils.isEmail(value)) {
-                  return 'Masukkan email dengan benar';
                 }
                 return null;
               },
@@ -88,9 +86,7 @@ class LoginPage extends StatelessWidget {
           Container(
             alignment: Alignment.centerLeft,
             child: GestureDetector(
-              onTap: () {
-                Get.toNamed('/forgot_password');
-              },
+              onTap: loginController.goToForgotPassword,
               child: Text(
                 'Lupa Password?',
                 style: GoogleFonts.poppins(
@@ -110,9 +106,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: 50),
       child: ElevatedButton(
-        onPressed: () {
-          Get.toNamed('/register');
-        },
+        onPressed: loginController.onSend,
         child: Text(
           "Login",
           style: GoogleFonts.poppins(
@@ -150,9 +144,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () {
-                  Get.toNamed('/register');
-                },
+                onTap: loginController.goToRegister,
                 child: Text(
                   ' Daftar',
                   style: GoogleFonts.poppins(
