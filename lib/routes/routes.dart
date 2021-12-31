@@ -1,9 +1,13 @@
 import 'package:get/route_manager.dart';
+import 'package:skillana_flutter/bindings/result_entrepreneur_binding.dart';
 import 'package:skillana_flutter/bindings/result_mbti_binding.dart';
 import 'package:skillana_flutter/bindings/result_msdt_binding.dart';
+import 'package:skillana_flutter/bindings/test_entrepreneur_binding.dart';
 import 'package:skillana_flutter/bindings/test_mbti_binding.dart';
 import 'package:skillana_flutter/bindings/test_msdt_binding.dart';
 import 'package:skillana_flutter/views/Auth/login_page.dart';
+import 'package:skillana_flutter/views/assesment/entrepreneur/index.dart';
+import 'package:skillana_flutter/views/assesment/entrepreneur/result.dart';
 import 'package:skillana_flutter/views/assesment/index.dart';
 import 'package:skillana_flutter/views/assesment/mbti/index.dart';
 import 'package:skillana_flutter/views/assesment/mbti/result.dart';
@@ -27,6 +31,8 @@ class AppPages {
   static const RESULT_MBTI = _Paths.RESULT_MBTI;
   static const ASSESMENT_MSDT = _Paths.ASSESMENT_MSDT;
   static const RESULT_MSDT = _Paths.RESULT_MSDT;
+  static const ASSESMENT_ENTREPRENEUR = _Paths.ASSESMENT_ENTREPRENEUR;
+  static const RESULT_ENTREPRENEUR = _Paths.RESULT_ENTREPRENEUR;
 }
 
 abstract class _Paths {
@@ -41,6 +47,8 @@ abstract class _Paths {
   static const RESULT_MBTI = '/result_mbti';
   static const ASSESMENT_MSDT = '/Assesment_msdt';
   static const RESULT_MSDT = '/result_msdt';
+  static const ASSESMENT_ENTREPRENEUR = '/Assesment_entrepreneur';
+  static const RESULT_ENTREPRENEUR = '/result_entrepreneur';
 }
 
 class AppRoutes {
@@ -69,6 +77,14 @@ class AppRoutes {
     GetPage(
         name: _Paths.RESULT_MSDT,
         page: () => ResultMSDT(),
-        binding: ResultMSDTBinding())
+        binding: ResultMSDTBinding()),
+    GetPage(
+        name: _Paths.ASSESMENT_ENTREPRENEUR,
+        page: () => TestEntrepreneur(),
+        binding: EntrepreneurBinding()),
+    GetPage(
+        name: _Paths.RESULT_ENTREPRENEUR,
+        page: () => ResultEntrepreneur(),
+        binding: ResultEntrepreneurBinding())
   ];
 }

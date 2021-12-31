@@ -157,7 +157,7 @@ Widget _content(context) {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
-                        'Tes Kepribadian',
+                        'Tes Entrepreneur',
                         style: GoogleFonts.poppins(
                           fontSize: 20,
                           color: HexColor('#363941'),
@@ -179,7 +179,9 @@ Widget _content(context) {
                         Container(
                           width: 150,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.toNamed(AppPages.ASSESMENT_ENTREPRENEUR);
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [

@@ -17,13 +17,11 @@ class LoginController extends GetxController {
   }
 
   void goToForgotPassword() {
-    this.formKey.currentState!.reset();
     this.passwordFC.text = '';
     Get.toNamed(AppPages.FORGOT_PASSWORD);
   }
 
   void goToRegister() {
-    this.formKey.currentState!.reset();
     this.passwordFC.text = '';
     Get.toNamed(AppPages.REGISTER);
   }

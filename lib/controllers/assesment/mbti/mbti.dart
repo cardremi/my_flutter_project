@@ -6,6 +6,7 @@ class MBTIController extends GetxController {
   final _questionData = [].obs;
   final temp = [];
   final _answerData = {}.obs;
+  final _isLoading = true.obs;
 
   int counter = 0;
 
@@ -52,16 +53,23 @@ class MBTIController extends GetxController {
   }
 
   onGetData() async {
-    var response = await ServiceProvider.getData('api/v1/tes/mbti?lang=id',
-        token: 's07bdlafaju0jvv2h7dp36lu4kbsmf8n');
+    try {
+      var response = await ServiceProvider.getData('api/v1/tes/mbti?lang=id',
+          token: 'j944v95r3g5i3bi5rcit44r6g68pa64h');
 
-    if (response['data'] != null) {
-      temp.assignAll(chunk(response['data'], 4));
-      _questionData.assignAll(temp[0]);
+      if (response['data'] != null) {
+        temp.assignAll(chunk(response['data'], 4));
+        _questionData.assignAll(temp[0]);
+      }
+      update();
+    } catch (e) {
+      print(e);
+    } finally {
+      _isLoading.value = false;
     }
-    update();
   }
 
   get questionData => _questionData;
   get answersData => _answerData;
+  get isLoading => _isLoading.value;
 }

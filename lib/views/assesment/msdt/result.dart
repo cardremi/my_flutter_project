@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:skillana_flutter/controllers/assesment/mbti/result.dart';
 import 'package:skillana_flutter/controllers/assesment/msdt/result.dart';
 import 'package:skillana_flutter/routes/routes.dart';
@@ -45,18 +46,32 @@ class ResultMSDT extends StatelessWidget {
     return GetBuilder<ResultMSDTController>(
         builder: (controller) => controller.resultData != null
             ? SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.only(top: 10, bottom: 20),
-                  width: (MediaQuery.of(context).size.width),
-                  decoration: BoxDecoration(color: HexColor('#f2f3f9')),
-                  child: Column(
-                    children: [
-                      _card_message(context),
-                      _image_content(controller.resultData),
-                      _content(controller.resultData)
-                    ],
-                  ),
-                ),
+                child: controller.isLoading
+                    ? Center(
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          alignment: Alignment.center,
+                          child: LoadingIndicator(
+                              indicatorType: Indicator.circleStrokeSpin,
+                              colors: const [Colors.blue],
+                              strokeWidth: 2,
+                              backgroundColor: Colors.transparent,
+                              pathBackgroundColor: Colors.transparent),
+                        ),
+                      )
+                    : Container(
+                        padding: EdgeInsets.only(top: 10, bottom: 20),
+                        width: (MediaQuery.of(context).size.width),
+                        decoration: BoxDecoration(color: HexColor('#f2f3f9')),
+                        child: Column(
+                          children: [
+                            _card_message(context),
+                            _image_content(controller.resultData),
+                            _content(controller.resultData)
+                          ],
+                        ),
+                      ),
               )
             : Container(
                 color: Colors.white,

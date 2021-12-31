@@ -40,6 +40,10 @@ dependencies:
   bulleted_list: ^0.0.1+0.1a
   dotted_border: ^2.0.0+2
   flutter_markdown: ^0.6.9
+  shimmer: ^2.0.0
+  loading_indicator: ^3.0.2
+  flutter_vector_icons: ^1.0.0
+  flutter_rating_bar: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -66,13 +70,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
   - assets/images/
-  - assets/images/blue_bg.png
-  - assets/images/yellow_bg.png
-  - assets/images/green_bg.png
-  - assets/images/purple_bg.png
   - assets/16personalities/
   - assets/Msdt/
-  #   - images/a_dot_ham.jpeg
+  - assets/resultBi/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

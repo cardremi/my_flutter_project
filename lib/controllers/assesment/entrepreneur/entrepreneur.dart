@@ -2,11 +2,15 @@ import 'package:get/get.dart';
 import 'package:skillana_flutter/routes/routes.dart';
 import 'package:skillana_flutter/services/service_provider.dart';
 
-class MSDTController extends GetxController {
+class EntrepreneurController extends GetxController {
   final _questionData = [].obs;
   final temp = [];
   final _answerData = {}.obs;
   final _isLoading = true.obs;
+
+  final options = [1, 2, 3, 4, 5, 6, 7].obs;
+
+  final optionsReverse = [7, 6, 5, 4, 3, 2, 1].obs;
 
   int counter = 0;
 
@@ -17,7 +21,7 @@ class MSDTController extends GetxController {
       _questionData.refresh();
       update();
     } else {
-      Get.toNamed(AppPages.RESULT_MSDT);
+      Get.toNamed(AppPages.RESULT_ENTREPRENEUR);
     }
   }
 
@@ -30,7 +34,7 @@ class MSDTController extends GetxController {
     }
   }
 
-  void answerData(String key, String value) {
+  void answerData(String key, int value) {
     _answerData[key] = value;
     _answerData.refresh();
     update();
@@ -55,13 +59,14 @@ class MSDTController extends GetxController {
   onGetData() async {
     try {
       var response = await ServiceProvider.getData(
-          'api/v1/assessment/test/msdt',
-          token: 'j944v95r3g5i3bi5rcit44r6g68pa64h');
+          'api/v1/assessment/test/business-insight',
+          token: 'tfckuje1pe5ao0ngjtmcv2p4pd92ebpn');
 
       if (response['data'] != null) {
         temp.assignAll(chunk(response['data'], 4));
         _questionData.assignAll(temp[0]);
       }
+      print(response['data'][0]['question']);
       update();
     } catch (e) {
       print(e);

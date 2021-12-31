@@ -3,6 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:skillana_flutter/controllers/assesment/mbti/result.dart';
 import 'package:skillana_flutter/routes/routes.dart';
 import 'package:skillana_flutter/widgets/general/bar_detail.dart';
@@ -42,87 +43,105 @@ class ResultMBTI extends StatelessWidget {
   Widget _body(context) {
     return GetBuilder<ResultMBTIController>(
         builder: (controller) => SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(top: 10, bottom: 20),
-                width: (MediaQuery.of(context).size.width),
-                decoration: BoxDecoration(color: HexColor('#f2f3f9')),
-                child: Column(
-                  children: [
-                    _card_message(context, controller.resultData),
-                    _image_content(controller.resultData),
-                    bar_detail(
-                        width: (MediaQuery.of(context).size.width) - 50,
-                        flexLeft: controller.resultData?['dimensi']
-                                ?['extrovert'] ??
-                            0,
-                        flexRight: controller.resultData?['dimensi']
-                                ?['introvert'] ??
-                            0,
-                        placeholderLeft: 'Extrovert',
-                        placeholderRight: 'Introvert',
-                        amountFlexLeft:
-                            '${controller.resultData?['dimensi']?['extrovert']}%',
-                        amountFlexRight:
-                            '${controller.resultData?['dimensi']?['introvert']}%'),
-                    SizedBox(
-                      height: 15,
+              child: controller.isLoading
+                  ? Center(
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        alignment: Alignment.center,
+                        child: LoadingIndicator(
+                            indicatorType: Indicator.circleStrokeSpin,
+                            colors: const [Colors.blue],
+                            strokeWidth: 2,
+                            backgroundColor: Colors.transparent,
+                            pathBackgroundColor: Colors.transparent),
+                      ),
+                    )
+                  : Container(
+                      padding: EdgeInsets.only(top: 10, bottom: 20),
+                      width: (MediaQuery.of(context).size.width),
+                      decoration: BoxDecoration(color: HexColor('#f2f3f9')),
+                      child: Column(
+                        children: [
+                          _card_message(context, controller.resultData),
+                          _image_content(controller.resultData),
+                          bar_detail(
+                              width: (MediaQuery.of(context).size.width) - 50,
+                              flexLeft: controller.resultData?['dimensi']
+                                      ?['extrovert'] ??
+                                  0,
+                              flexRight: controller.resultData?['dimensi']
+                                      ?['introvert'] ??
+                                  0,
+                              placeholderLeft: 'Extrovert',
+                              placeholderRight: 'Introvert',
+                              amountFlexLeft:
+                                  '${controller.resultData?['dimensi']?['extrovert']}%',
+                              amountFlexRight:
+                                  '${controller.resultData?['dimensi']?['introvert']}%'),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          bar_detail(
+                              width: (MediaQuery.of(context).size.width) - 50,
+                              flexLeft: controller.resultData?['dimensi']
+                                      ?['sensing'] ??
+                                  0,
+                              flexRight: controller.resultData?['dimensi']
+                                      ?['intuition'] ??
+                                  0,
+                              placeholderLeft: 'Sensing',
+                              placeholderRight: 'Intuition',
+                              amountFlexLeft:
+                                  '${controller.resultData?['dimensi']?['sensing']}%',
+                              amountFlexRight:
+                                  '${controller.resultData?['dimensi']?['intuition']}%'),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          bar_detail(
+                              width: (MediaQuery.of(context).size.width) - 50,
+                              flexLeft: controller.resultData?['dimensi']
+                                      ?['thinking'] ??
+                                  0,
+                              flexRight: controller.resultData?['dimensi']
+                                      ?['feeling'] ??
+                                  0,
+                              placeholderLeft: 'Thinking',
+                              placeholderRight: 'Feeling',
+                              amountFlexLeft:
+                                  '${controller.resultData?['dimensi']?['thinking']}%',
+                              amountFlexRight:
+                                  '${controller.resultData?['dimensi']?['feeling']}%'),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          bar_detail(
+                              width: (MediaQuery.of(context).size.width) - 50,
+                              flexLeft: controller.resultData?['dimensi']
+                                      ?['judging'] ??
+                                  0,
+                              flexRight: controller.resultData?['dimensi']
+                                      ?['perceiving'] ??
+                                  0,
+                              placeholderLeft: 'Judging',
+                              placeholderRight: 'Perceiving',
+                              amountFlexLeft:
+                                  '${controller.resultData?['dimensi']?['judging']}%',
+                              amountFlexRight:
+                                  '${controller.resultData?['dimensi']?['perceiving']}%'),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          _quotes(context, controller.resultData),
+                          _characteristic(context, controller.resultData),
+                          _cognitif(context, controller.resultData),
+                          _profession(context, controller.resultData),
+                          _pathner(context, controller.resultData),
+                          _suggestion(context, controller.resultData)
+                        ],
+                      ),
                     ),
-                    bar_detail(
-                        width: (MediaQuery.of(context).size.width) - 50,
-                        flexLeft:
-                            controller.resultData?['dimensi']?['sensing'] ?? 0,
-                        flexRight: controller.resultData?['dimensi']
-                                ?['intuition'] ??
-                            0,
-                        placeholderLeft: 'Sensing',
-                        placeholderRight: 'Intuition',
-                        amountFlexLeft:
-                            '${controller.resultData?['dimensi']?['sensing']}%',
-                        amountFlexRight:
-                            '${controller.resultData?['dimensi']?['intuition']}%'),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    bar_detail(
-                        width: (MediaQuery.of(context).size.width) - 50,
-                        flexLeft:
-                            controller.resultData?['dimensi']?['thinking'] ?? 0,
-                        flexRight:
-                            controller.resultData?['dimensi']?['feeling'] ?? 0,
-                        placeholderLeft: 'Thinking',
-                        placeholderRight: 'Feeling',
-                        amountFlexLeft:
-                            '${controller.resultData?['dimensi']?['thinking']}%',
-                        amountFlexRight:
-                            '${controller.resultData?['dimensi']?['feeling']}%'),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    bar_detail(
-                        width: (MediaQuery.of(context).size.width) - 50,
-                        flexLeft:
-                            controller.resultData?['dimensi']?['judging'] ?? 0,
-                        flexRight: controller.resultData?['dimensi']
-                                ?['perceiving'] ??
-                            0,
-                        placeholderLeft: 'Judging',
-                        placeholderRight: 'Perceiving',
-                        amountFlexLeft:
-                            '${controller.resultData?['dimensi']?['judging']}%',
-                        amountFlexRight:
-                            '${controller.resultData?['dimensi']?['perceiving']}%'),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    _quotes(context, controller.resultData),
-                    _characteristic(context, controller.resultData),
-                    _cognitif(context, controller.resultData),
-                    _profession(context, controller.resultData),
-                    _pathner(context, controller.resultData),
-                    _suggestion(context, controller.resultData)
-                  ],
-                ),
-              ),
             ));
   }
 
